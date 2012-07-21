@@ -77,6 +77,8 @@ abstract class AbstractCachedListPage extends SortablePage {
     }
     
     /**
+     * <p>If your CacheBuilder returns another structure than one which contains directly the objects,<br />you should overwrite this method.</p>
+     *
      * @see \wcf\page\MultipleLinkPage::countItems()
      */
     public function countItems() {
@@ -87,12 +89,13 @@ abstract class AbstractCachedListPage extends SortablePage {
     }
     
     /**
+     * <p>If your CacheBuilder returns another structure than one which contains directly the objects,<br />you should overwrite this method.</p>
+     *
      * @see \wcf\page\SortablePage::assignVariables()
      */
     public function assignVariables() {
-        AbstractPage::assignVariables();
+        parent::assignVariables();
         
-        // assign sorting parameters
         // overwrite MultipleLinkPage objects assignment
 		WCF::getTPL()->assign(array(
 			'sortField' => $this->sortField,
