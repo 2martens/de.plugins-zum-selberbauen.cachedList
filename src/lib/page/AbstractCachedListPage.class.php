@@ -10,10 +10,10 @@ use wcf\util\ClassUtil;
  *
  * @author Jim Martens
  * @copyright 2011-2012 Jim Martens
- * @license http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
- * @package de.plugins-zum-selberbauen.ultimate
+ * @license http://opensource.org/licenses/lgpl-license.php GNU Lesser General Public License
+ * @package de.plugins-zum-selberbauen.cachedList
  * @subpackage page
- * @category Ultimate CMS
+ * @category Community Framework
  */
 abstract class AbstractCachedListPage extends SortablePage {
     
@@ -30,27 +30,61 @@ abstract class AbstractCachedListPage extends SortablePage {
     public $cacheName = '';
     
     /**
-     * Contains the read cache objects.
+     * Contains the index of the returned cache data.
+     * @var string
+     */
+    public $cacheIndex = '';
+    
+    /**
+     * Contains all read objects.
      * @var array
      */
     public $objects = array();
     
     /**
+     * Contains the current objects.
+     * @var array
+     */
+    public $currentObjects = array();
+    
+    /**
      * @see \wcf\page\SortablePage::readData()
      */
     public function readData() {
-        //calling SortablePage methods
+        // calling SortablePage methods
         $this->validateSortOrder();
         $this->validateSortField();
         
         AbstractPage::readData();
         
-        //calling MultipleLinkPage methods
+        // calling MultipleLinkPage methods
         $this->initObjectList();
         $this->calculateNumberOfPages();
         
-        //calling own methods
+        // calling own methods
         $this->loadCache();
+        
+        // only read objects from database, when another sortField is chosen
+        if ($this->items) {
+            
+            if ($this->sortField != $this->defaultSortField) {
+                $this->sqlLimit = $this->itemsPerPage;
+                $this->sqlOffset = ($this->pageNo - 1) * $this->itemsPerPage;
+                if ($this->sortField && $this->sortOrder) $this->sqlOrderBy = $this->sortField." ".$this->sortOrder;
+                
+                $this->readObjects();
+                $this->objectList->readObjectIDs();
+                $objectIDs = $this->objectList->getObjectIDs();
+                $objects = $this->objectList->getObjects();
+                $this->objects = array_combine($objectIDs, $objects);
+            } elseif ($this->sortOrder != $this->defaultSortOrder) {
+                // if the default sortField is selected but another order is chosen
+                // it's enough to reverse the already read array
+                $this->objects = array_reverse($this->objects, true);
+                $this->currentObjects = array_reverse($this->currentObjects, true);
+            }
+        }
+        
     }
     
     /**
@@ -60,7 +94,7 @@ abstract class AbstractCachedListPage extends SortablePage {
      * @param string $path the application path; default WCF_DIR
      */
     public function loadCache($path = WCF_DIR) {
-        //call loadCache event
+        // call loadCache event
         EventHandler::getInstance()->fireEvent($this, 'loadCache');
         
         if (!ClassUtil::isInstanceOf($this->cacheBuilderClassName, 'wcf\system\cache\builder\ICacheBuilder')) {
@@ -73,7 +107,8 @@ abstract class AbstractCachedListPage extends SortablePage {
             $file,
             $cacheBuilderClassName
         );
-        $this->objects = CacheHandler::getInstance()->get($cache);
+        $this->objects = CacheHandler::getInstance()->get($cache, $this->cacheIndex);
+        $this->currentObjects = array_slice($this->objects, ($this->pageNo - 1) * $this->itemsPerPage, $this->itemsPerPage, true);
     }
     
     /**
@@ -100,7 +135,7 @@ abstract class AbstractCachedListPage extends SortablePage {
 		WCF::getTPL()->assign(array(
 			'sortField' => $this->sortField,
 			'sortOrder' => $this->sortOrder,
-			'objects' => $this->objects
+			'objects' => $this->currentObjects
 		));
     }
 }
