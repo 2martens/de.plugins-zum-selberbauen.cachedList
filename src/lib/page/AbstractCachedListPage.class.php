@@ -4,6 +4,7 @@ use wcf\system\cache\CacheHandler;
 use wcf\system\event\EventHandler;
 use wcf\system\exception\SystemException;
 use wcf\util\ClassUtil;
+use wcf\system\WCF;
 
 /**
  * Provides functionality for cached lists.
@@ -57,12 +58,12 @@ abstract class AbstractCachedListPage extends SortablePage {
         
         AbstractPage::readData();
         
+        // calling own methods
+        $this->loadCache();
+        
         // calling MultipleLinkPage methods
         $this->initObjectList();
         $this->calculateNumberOfPages();
-        
-        // calling own methods
-        $this->loadCache();
         
         // only read objects from database, when another sortField is chosen
         if ($this->items) {
@@ -95,7 +96,7 @@ abstract class AbstractCachedListPage extends SortablePage {
      */
     public function loadCache($path = WCF_DIR) {
         // call loadCache event
-        EventHandler::getInstance()->fireEvent($this, 'loadCache');
+        EventHandler::getInstance()->fireAction($this, 'loadCache');
         
         if (!ClassUtil::isInstanceOf($this->cacheBuilderClassName, 'wcf\system\cache\builder\ICacheBuilder')) {
             throw new SystemException("Class '".$this->cacheBuilderClassName."' does not implement 'wcf\system\cache\builder\ICacheBuilder'");
@@ -103,11 +104,11 @@ abstract class AbstractCachedListPage extends SortablePage {
         
         $file = $path.'cache/cache.'.$this->cacheName.'.php';
         CacheHandler::getInstance()->addResource(
-            $this->cache,
+            $this->cacheName,
             $file,
-            $cacheBuilderClassName
+            $this->cacheBuilderClassName
         );
-        $this->objects = CacheHandler::getInstance()->get($cache, $this->cacheIndex);
+        $this->objects = CacheHandler::getInstance()->get($this->cacheName, $this->cacheIndex);
         $this->currentObjects = array_slice($this->objects, ($this->pageNo - 1) * $this->itemsPerPage, $this->itemsPerPage, true);
     }
     
