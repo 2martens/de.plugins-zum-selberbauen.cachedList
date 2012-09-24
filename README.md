@@ -17,8 +17,8 @@ Developers are always welcome to fork CachedList and provide features or bug fix
 * Testing is key, you MUST try out your changes before submitting pull requests
 * You MUST save your files with Unix-style line endings (\n)
 * You MUST NOT include the closing tag of a PHP block at the end of file, provide an empty newline instead
-* You MUST use spaces for indentation
-    * Tab size of 4 is required
+* You MUST use tabs for indentation
+    * Tab size of 4 is preferred
     * Empty lines MUST be indented equal to previous line
 * All comments within source code MUST be written in English language
 
