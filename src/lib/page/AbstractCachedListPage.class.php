@@ -74,15 +74,14 @@ abstract class AbstractCachedListPage extends SortablePage {
                 if ($this->sortField && $this->sortOrder) $this->sqlOrderBy = $this->sortField." ".$this->sortOrder;
                 
                 $this->readObjects();
-                $this->objectList->readObjectIDs();
-                $objectIDs = $this->objectList->getObjectIDs();
                 $objects = $this->objectList->getObjects();
-                $this->objects = array_combine($objectIDs, $objects);
+                $this->objects = $objects;
+                $this->currentObjects = array_slice($this->objects, ($this->pageNo - 1) * $this->itemsPerPage, $this->itemsPerPage, true);
             } elseif ($this->sortOrder != $this->defaultSortOrder) {
                 // if the default sortField is selected but another order is chosen
                 // it's enough to reverse the already read array
                 $this->objects = array_reverse($this->objects, true);
-                $this->currentObjects = array_reverse($this->currentObjects, true);
+                $this->currentObjects = array_slice($this->objects, ($this->pageNo - 1) * $this->itemsPerPage, $this->itemsPerPage, true);
             }
         }
         
