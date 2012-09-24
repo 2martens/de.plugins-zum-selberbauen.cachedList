@@ -3,8 +3,8 @@ namespace wcf\page;
 use wcf\system\cache\CacheHandler;
 use wcf\system\event\EventHandler;
 use wcf\system\exception\SystemException;
-use wcf\util\ClassUtil;
 use wcf\system\WCF;
+use wcf\util\ClassUtil;
 
 /**
  * Provides functionality for cached lists.
@@ -37,6 +37,12 @@ abstract class AbstractCachedListPage extends SortablePage {
 	public $cacheIndex = '';
 	
 	/**
+	 * Contains an object decorator class.
+	 * @var string
+	 */
+	public $objectDecoratorClass = '';
+	
+	/**
 	 * Contains all read objects.
 	 * @var array
 	 */
@@ -52,14 +58,14 @@ abstract class AbstractCachedListPage extends SortablePage {
 	 * @see \wcf\page\SortablePage::readData()
 	 */
 	public function readData() {
+		// calling own methods
+		$this->loadCache();
+		
 		// calling SortablePage methods
 		$this->validateSortOrder();
 		$this->validateSortField();
 		
 		AbstractPage::readData();
-		
-		// calling own methods
-		$this->loadCache();
 		
 		// calling MultipleLinkPage methods
 		$this->initObjectList();
@@ -75,6 +81,11 @@ abstract class AbstractCachedListPage extends SortablePage {
 				
 				$this->readObjects();
 				$objects = $this->objectList->getObjects();
+				if (!empty($this->objectDecoratorClass) && ClassUtil::isInstanceOf($this->objectDecoratorClass, '\wcf\data\DatabaseObjectDecorator')) {
+					foreach ($objects as $objectID => $object) {
+						$objects[$objectID] = new $this->objectDecoratorClass($object);
+					}
+				}
 				$this->objects = $objects;
 				$this->currentObjects = array_slice($this->objects, ($this->pageNo - 1) * $this->itemsPerPage, $this->itemsPerPage, true);
 			} elseif ($this->sortOrder != $this->defaultSortOrder) {
