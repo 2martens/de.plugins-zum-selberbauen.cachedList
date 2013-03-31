@@ -9,12 +9,12 @@ use wcf\util\ClassUtil;
 /**
  * Provides functionality for cached lists.
  *
- * @author Jim Martens
- * @copyright 2011-2012 Jim Martens
- * @license http://opensource.org/licenses/lgpl-license.php GNU Lesser General Public License
- * @package de.plugins-zum-selberbauen.cachedList
- * @subpackage page
- * @category Community Framework
+ * @author		Jim Martens
+ * @copyright	2011-2013 Jim Martens
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
+ * @package		de.plugins-zum-selberbauen.cachedList
+ * @subpackage	page
+ * @category	Community Framework
  */
 abstract class AbstractCachedListPage extends SortablePage {
 	
@@ -23,12 +23,6 @@ abstract class AbstractCachedListPage extends SortablePage {
 	 * @var string
 	 */
 	public $cacheBuilderClassName = '';
-	
-	/**
-	 * Contains the name of the cache.
-	 * @var string
-	 */
-	public $cacheName = '';
 	
 	/**
 	 * Contains the index of the returned cache data.
@@ -102,7 +96,7 @@ abstract class AbstractCachedListPage extends SortablePage {
 	 * Loads the cache for the list.
 	 * To use a custom path please overwrite this method <br />and replace WCF_DIR with the wanted application dir.
 	 *
-	 * @param string $path the application path; default WCF_DIR
+	 * @param	string	$path the application path; default WCF_DIR
 	 */
 	public function loadCache($path = WCF_DIR) {
 		// call loadCache event
@@ -112,13 +106,8 @@ abstract class AbstractCachedListPage extends SortablePage {
 			throw new SystemException("Class '".$this->cacheBuilderClassName."' does not implement 'wcf\system\cache\builder\ICacheBuilder'");
 		}
 		
-		$file = $path.'cache/cache.'.$this->cacheName.'.php';
-		CacheHandler::getInstance()->addResource(
-			$this->cacheName,
-			$file,
-			$this->cacheBuilderClassName
-		);
-		$this->objects = CacheHandler::getInstance()->get($this->cacheName, $this->cacheIndex);
+		$instance = call_user_func($this->cacheBuilderClassName.'::getInstance');
+		$this->objects = $instance->getData(array(), $this->cacheIndex);
 		$this->currentObjects = array_slice($this->objects, ($this->pageNo - 1) * $this->itemsPerPage, $this->itemsPerPage, true);
 	}
 	
@@ -137,7 +126,7 @@ abstract class AbstractCachedListPage extends SortablePage {
 	/**
 	 * <p>If your CacheBuilder returns another structure than one which contains directly the objects,<br />you should overwrite this method.</p>
 	 *
-	 * @see \wcf\page\SortablePage::assignVariables()
+	 * @see	\wcf\page\SortablePage::assignVariables()
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
