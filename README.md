@@ -7,22 +7,12 @@ Adds an abstract class for cached lists.
 Version notes
 -------------
 
-The currently available source code represents an early alpha version of CachedList and should not be used in productive environments.
+The currently available source code represents an early beta version of CachedList and should not be used in productive environments.
 
 Contribution
 ------------
 
-Developers are always welcome to fork CachedList and provide features or bug fixes using pull requests. If you make changes or add classes it is mandatory to follow the requirements below:
-
-* Testing is key, you MUST try out your changes before submitting pull requests
-* You MUST save your files with Unix-style line endings (\n)
-* You MUST NOT include the closing tag of a PHP block at the end of file, provide an empty newline instead
-* You MUST use tabs for indentation
-    * Tab size of 4 is preferred
-    * Empty lines MUST be indented equal to previous line
-* All comments within source code MUST be written in English language
-
-Follow the above conventions if you want your pull requests accepted.
+For information on contributing to the CachedList refer to CONTRIBUTING.md in this folder.
 
 License
 -------
