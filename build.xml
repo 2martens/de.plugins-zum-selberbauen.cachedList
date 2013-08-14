@@ -5,15 +5,17 @@
 		<delete>
 			<fileset dir="metadata" includes="**/*.tar"/>
 		</delete>
-		<delete>
-			<fileset dir="build" includes="**/*.tar*" />
-		</delete>
-		<delete>
+		<delete failonerror="false" dir="build" />
+		<delete failonerror="false">
 			<fileset dir="${ultimateCMSRepoRequirements}" includes="**/*cachedList.tar*" />
 		</delete>
 	</target>
+	
+	<target name="prepare" depends="clean" description="Prepares the build.">
+		<mkdir dir="build"/>
+	</target>
 
-	<target name="pack" depends="clean" description="Packs the tar files.">
+	<target name="pack" depends="prepare" description="Packs the tar files.">
 		<tar destfile="metadata/files.tar">
 			<tarfileset dir="src">
 				<exclude name="templates/**" />
