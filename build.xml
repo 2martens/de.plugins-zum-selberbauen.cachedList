@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Cached List" default="dist">
+<project name="Cached List" default="build">
 	<target name="clean" description="Deletes old tar files.">
 		<delete>
 			<fileset dir="metadata" includes="**/*.tar"/>
@@ -20,7 +20,7 @@
 		</tar>
 	</target>
 
-	<target name="dist" depends="pack" description="Generates the package archive.">
+	<target name="build" depends="pack" description="Generates the package archive.">
 		<tar destfile="build/de.plugins-zum-selberbauen.cachedList.tar" 
 			 basedir="metadata"
 		/>
