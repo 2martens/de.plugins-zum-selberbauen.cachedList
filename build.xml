@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Cached List" default="dist">
-	<property name="ultimateCMSRepoRequirements" location="../de.plugins-zum-selberbauen.ultimate/de.plugins-zum-selberbauen.ultimate/requirements" />
+	<property name="ultimateCMSRepoRequirements" location="../Ultimate CMS/de.plugins-zum-selberbauen.ultimate/requirements" />
 	<target name="clean" description="Deletes old tar files.">
 		<delete>
 			<fileset dir="metadata" includes="**/*.tar"/>
@@ -23,7 +23,7 @@
 	</target>
 
 	<target name="dist" depends="pack" description="Generates the package archive.">
-		<tar destfile="$build/de.plugins-zum-selberbauen.cachedList.tar" 
+		<tar destfile="build/de.plugins-zum-selberbauen.cachedList.tar" 
 			 basedir="metadata"
 		/>
 		<gzip src="build/de.plugins-zum-selberbauen.cachedList.tar"
