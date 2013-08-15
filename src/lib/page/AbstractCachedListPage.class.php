@@ -82,7 +82,8 @@ abstract class AbstractCachedListPage extends SortablePage {
 				}
 				$this->objects = $objects;
 				$this->currentObjects = array_slice($this->objects, ($this->pageNo - 1) * $this->itemsPerPage, $this->itemsPerPage, true);
-			} elseif ($this->sortOrder != $this->defaultSortOrder) {
+			}
+			else if ($this->sortOrder != $this->defaultSortOrder) {
 				// if the default sortField is selected but another order is chosen
 				// it's enough to reverse the already read array
 				$this->objects = array_reverse($this->objects, true);
