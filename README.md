@@ -8,8 +8,8 @@ Version notes
 
 The currently available source code represents an early beta version of CachedList and should not be used in productive environments.
 
-* Dev-Branch: [![Build Status](https://travis-ci.org/frmwrk123/CachedList.png?branch=dev)](https://travis-ci.org/frmwrk123/CachedList)
-* Master-Branch: [![Build Status](https://travis-ci.org/frmwrk123/CachedList.png?branch=master)](https://travis-ci.org/frmwrk123/CachedList)
+* Dev-Branch: [![Build Status](https://travis-ci.org/frmwrk123/de.plugins-zum-selberbauen.cachedList.png?branch=dev)](https://travis-ci.org/frmwrk123/de.plugins-zum-selberbauen.cachedList)
+* Master-Branch: [![Build Status](https://travis-ci.org/frmwrk123/de.plugins-zum-selberbauen.cachedList.png?branch=master)](https://travis-ci.org/frmwrk123/de.plugins-zum-selberbauen.cachedList)
 
 Contribution
 ------------
