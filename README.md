@@ -6,10 +6,16 @@ Adds an abstract class for cached lists.
 Version notes
 -------------
 
-The currently available source code represents an early beta version of CachedList and should not be used in productive environments.
+The currently available source code represents a beta version of CachedList and should not be used in productive environments.
 
 * Dev-Branch: [![Build Status](https://travis-ci.org/frmwrk123/de.plugins-zum-selberbauen.cachedList.png?branch=dev)](https://travis-ci.org/frmwrk123/de.plugins-zum-selberbauen.cachedList)
 * Master-Branch: [![Build Status](https://travis-ci.org/frmwrk123/de.plugins-zum-selberbauen.cachedList.png?branch=master)](https://travis-ci.org/frmwrk123/de.plugins-zum-selberbauen.cachedList)
+
+Branch structure (until first stable release)
+----------------
+
+* master Contains tagged release versions.
+* dev The development happens here. Whenever a release is stable and complete, it gets merged into master. Pull requests are merged into dev and start from there. That's why dev is the default branch of the repository.
 
 Contribution
 ------------
