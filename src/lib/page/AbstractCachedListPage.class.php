@@ -53,6 +53,9 @@ abstract class AbstractCachedListPage extends SortablePage {
 	 */
 	public function readData() {
 		// calling own methods
+		if ($this->pageNo == 0) {
+			$this->pageNo = 1;
+		}
 		$this->loadCache();
 		
 		// calling SortablePage methods
