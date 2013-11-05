@@ -8,8 +8,8 @@
         <packagedescription language="de-informal"><![CDATA[Fügt eine abstrakte Klasse für gecashte Liste hinzu.]]></packagedescription>
         
         <isapplication>0</isapplication>
-        <version>1.0.0 Beta 2</version>
-        <date>2013-08-26</date>
+        <version>1.0.0 Beta 3</version>
+        <date>2013-11-05</date>
     </packageinformation>
     
     <authorinformation>
@@ -26,6 +26,7 @@
         <instruction type="file">files.tar</instruction>
     </instructions>
     
-    <instructions type="update" fromversion="1.0.0 Beta 1">
+    <instructions type="update" fromversion="1.0.0 Beta 2">
+    	<instruction type="file">files.tar</instruction>
     </instructions>
 </package>
