@@ -8,8 +8,8 @@
         <packagedescription language="de-informal"><![CDATA[Fügt eine abstrakte Klasse für gecashte Liste hinzu.]]></packagedescription>
         
         <isapplication>0</isapplication>
-        <version>1.0.0 Beta 3</version>
-        <date>2013-11-05</date>
+        <version>1.0.0 RC 1</version>
+        <date>2013-12-24</date>
     </packageinformation>
     
     <authorinformation>
@@ -18,7 +18,7 @@
     </authorinformation>
     
     <requiredpackages>
-        <requiredpackage minversion="2.0.0*">com.woltlab.wcf</requiredpackage>
+        <requiredpackage minversion="2.0.0">com.woltlab.wcf</requiredpackage>
     </requiredpackages>
     
     <instructions type="install">
@@ -26,7 +26,6 @@
         <instruction type="file">files.tar</instruction>
     </instructions>
     
-    <instructions type="update" fromversion="1.0.0 Beta 2">
-    	<instruction type="file">files.tar</instruction>
+    <instructions type="update" fromversion="1.0.0 Beta 3">
     </instructions>
 </package>

@@ -6,7 +6,7 @@ Adds an abstract class for cached lists.
 Version notes
 -------------
 
-The currently available source code represents a beta version of CachedList and should not be used in productive environments.
+The currently available source code represents a release candidate version of CachedList and should not be used in productive environments.
 
 * Dev-Branch: [![Build Status](https://travis-ci.org/frmwrk123/de.plugins-zum-selberbauen.cachedList.png?branch=dev)](https://travis-ci.org/frmwrk123/de.plugins-zum-selberbauen.cachedList)
 * Master-Branch: [![Build Status](https://travis-ci.org/frmwrk123/de.plugins-zum-selberbauen.cachedList.png?branch=master)](https://travis-ci.org/frmwrk123/de.plugins-zum-selberbauen.cachedList)
