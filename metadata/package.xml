@@ -27,5 +27,6 @@
     </instructions>
     
     <instructions type="update" fromversion="1.0.0 RC 1">
+    	<instruction type="file">files.tar</instruction>
     </instructions>
 </package>
