@@ -98,11 +98,10 @@ abstract class AbstractCachedListPage extends SortablePage {
 	
 	/**
 	 * Loads the cache for the list.
-	 * To use a custom path please overwrite this method <br />and replace WCF_DIR with the wanted application dir.
 	 *
-	 * @param	string	$path the application path; default WCF_DIR
+	 * @throws \wcf\system\exception\SystemException if cacheBuilderClassName does not implement ICacheBuilder
 	 */
-	public function loadCache($path = WCF_DIR) {
+	public function loadCache() {
 		// call loadCache event
 		EventHandler::getInstance()->fireAction($this, 'loadCache');
 		
