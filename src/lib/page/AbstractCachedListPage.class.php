@@ -106,7 +106,7 @@ abstract class AbstractCachedListPage extends SortablePage {
 		EventHandler::getInstance()->fireAction($this, 'loadCache');
 		
 		if (!ClassUtil::isInstanceOf($this->cacheBuilderClassName, 'wcf\system\cache\builder\ICacheBuilder')) {
-			throw new SystemException("Class '".$this->cacheBuilderClassName."' does not implement 'wcf\system\cache\builder\ICacheBuilder'");
+			throw new SystemException("Class '".$this->cacheBuilderClassName."' does not implement 'wcf\\system\\cache\\builder\\ICacheBuilder'");
 		}
 		
 		$instance = call_user_func($this->cacheBuilderClassName.'::getInstance');
