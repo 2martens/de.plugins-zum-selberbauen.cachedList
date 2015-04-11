@@ -84,7 +84,7 @@ abstract class AbstractCachedListPage extends SortablePage {
 					}
 				}
 				$this->objects = $objects;
-				$this->currentObjects = array_slice($this->objects, ($this->pageNo - 1) * $this->itemsPerPage, $this->itemsPerPage, true);
+				$this->currentObjects = $objects;
 			}
 			else if ($this->sortOrder != $this->defaultSortOrder) {
 				// if the default sortField is selected but another order is chosen
